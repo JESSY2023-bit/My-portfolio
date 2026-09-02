@@ -1,0 +1,42 @@
+:host { display: block; }
+.topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; border-bottom: 1px solid rgba(255,255,255,.06); background: rgba(5,8,23,.92); backdrop-filter: blur(14px); }
+#accueil { padding-top: 9rem; }
+.hamburger { display: none; }
+@media (max-width: 767px) {
+  .hamburger { display: inline-block; }
+  nav .mobile-nav { position: absolute; top: 100%; left: 0; right: 0; display: none !important; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid rgba(255,255,255,.08); background: #080b19; padding: .75rem 1.5rem; }
+  nav .mobile-nav.mobile-nav-open { display: flex !important; }
+  nav .mobile-nav a { padding: .75rem 0; }
+}
+.light-theme { background: #f4f7fb !important; color: #172033; }
+.light-theme .topbar { background: rgba(244,247,251,.92); border-color: rgba(15,23,42,.1); }
+.light-theme .bg-\[\#080b19\], .light-theme .bg-\[\#0d1123\] { background: #ffffff; }
+.light-theme .text-slate-100, .light-theme .text-white, .light-theme .text-slate-200 { color: #172033; }
+.section-title { color: #e2e8f0; font-size: .72rem; font-weight: 800; letter-spacing: .04em; }
+.info-card { display: flex; flex-direction: column; gap: .25rem; border: 1px solid rgba(255,255,255,.06); border-radius: .5rem; padding: .7rem; background: rgba(255,255,255,.02); }
+.info-card:first-letter, .info-card b { color: #a78bfa; }
+.skill-card { display: flex; flex-direction: column; align-items: center; gap: .6rem; border: 1px solid rgba(255,255,255,.07); border-radius: .5rem; padding: .9rem .4rem; background: #0d1123; color: #94a3b8; font-size: .65rem; text-align: center; }
+.skill-card img { width: 2rem; height: 2rem; object-fit: contain; }
+.project-card { overflow: hidden; border: 1px solid rgba(255,255,255,.07); border-radius: .65rem; background: #0d1123; transition: transform .2s, border-color .2s; }
+.project-card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,.6); }
+.project-card h3 { font-size: .8rem; font-weight: 700; color: #f8fafc; }
+.project-card p { margin-top: .55rem; font-size: .65rem; line-height: 1.5; color: #94a3b8; }
+.project-visual { display: flex; height: 115px; align-items: center; justify-content: center; background: radial-gradient(circle at 70% 20%, #4338ca, transparent 45%), #171a3a; color: #c4b5fd; font-size: 1rem; font-weight: 900; letter-spacing: .15em; }
+.project-image { display: block; width: 100%; height: 220px; object-fit: contain; object-position: center; background: #080b19; }
+.project-visual.market { background: radial-gradient(circle at 30% 20%, #0e7490, transparent 50%), #102a3c; color: #67e8f9; }
+.project-visual.birthday { background: radial-gradient(circle at 50% 20%, #be185d, transparent 55%), #32133a; color: #f9a8d4; }
+.project-visual.tasks { background: radial-gradient(circle at 70% 30%, #047857, transparent 50%), #102a2b; color: #6ee7b7; }
+.project-visual.portfolio { background: radial-gradient(circle at 50% 20%, #7c3aed, transparent 55%), #17132f; color: #ddd6fe; }
+.tag, .collab { border-radius: .2rem; background: rgba(139,92,246,.12); padding: .18rem .35rem; font-size: .55rem; color: #a78bfa; }
+.collab { flex-shrink: 0; color: #67e8f9; background: rgba(34,211,238,.1); }
+.contact-card { display: flex; align-items: center; gap: .7rem; border: 1px solid rgba(255,255,255,.06); border-radius: .5rem; padding: .8rem; color: #a78bfa; font-size: 1.1rem; background: rgba(255,255,255,.02); }
+.contact-card span { display: flex; flex-direction: column; gap: .2rem; color: #94a3b8; font-size: .65rem; }
+.contact-card b { color: #e2e8f0; }
+.code-window i { display: block; width: .35rem; height: .35rem; border-radius: 9999px; background: #a78bfa; }
+.code-window > div { display: flex; gap: .25rem; }
+.social-icon svg { width: 1.15rem; height: 1.15rem; }
+.social-icon, .social-text, .cv-link { transition: color .2s; }
+.social-icon:hover, .social-text:hover, .cv-link:hover { color: #a78bfa; }
+.cv-link { border: 1px solid rgba(167,139,250,.45); border-radius: .35rem; padding: .35rem .5rem; font-size: .65rem; font-weight: 700; color: #c4b5fd; }
+.contact-github { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+.avatar-3d { filter: saturate(1.08) contrast(1.05) drop-shadow(0 18px 28px rgba(82, 45, 180, .28)); }

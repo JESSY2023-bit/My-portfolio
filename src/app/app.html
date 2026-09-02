@@ -1,0 +1,147 @@
+<main [class.light-theme]="lightMode()" class="min-h-screen overflow-hidden bg-[#050817] text-slate-100" (click)="closeMenu()">
+  <nav class="topbar mx-auto flex max-w-6xl items-center justify-between px-6 py-5 lg:px-8">
+    <a href="#accueil" class="text-2xl font-black tracking-tight text-white">JO<span class="text-violet-500">.</span></a>
+
+    <div [class.mobile-nav-open]="menuOpen()" class="mobile-nav hidden items-center gap-7 text-xs font-medium text-slate-400 md:flex" (click)="$event.stopPropagation()">
+      <a href="#accueil" class="text-violet-400" (click)="closeMenu()">{{ t('navHome') }}</a>
+      <a href="#a-propos" class="transition hover:text-white" (click)="closeMenu()">{{ t('navAbout') }}</a>
+      <a href="#competences" class="transition hover:text-white" (click)="closeMenu()">{{ t('navSkills') }}</a>
+      <a href="#projets" class="transition hover:text-white" (click)="closeMenu()">{{ t('navProjects') }}</a>
+      <a href="#experience" class="transition hover:text-white" (click)="closeMenu()">{{ t('navExperience') }}</a>
+      <a href="#contact" class="transition hover:text-white" (click)="closeMenu()">{{ t('navContact') }}</a>
+    </div>
+
+    <div class="flex items-center gap-2" (click)="$event.stopPropagation()">
+      <button class="rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-300"
+        (click)="toggleLanguage()" [attr.aria-label]="'Langue : ' + language()">
+        {{ language() === 'fr' ? 'EN' : 'FR' }}
+      </button>
+      <button class="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-300"
+        (click)="toggleTheme()" [attr.aria-label]="t('theme')">◐</button>
+      <button class="hamburger rounded border border-slate-700 px-3 py-1 text-lg text-slate-300"
+        (click)="toggleMenu()" [attr.aria-label]="t('menu')">☰</button>
+    </div>
+  </nav>
+
+  <section id="accueil" class="relative border-y border-white/5">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 lg:grid-cols-[1fr_1fr] lg:px-8 lg:py-20">
+      <div class="relative z-10">
+        <span class="mb-5 inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 text-[10px] text-emerald-300">● {{ t('available') }}</span>
+        <p class="text-lg text-slate-200">{{ t('hello') }}</p>
+        <h1 class="mt-1 text-5xl font-black leading-none tracking-tight sm:text-7xl">JESSY <span class="text-violet-500">ODRIV</span></h1>
+        <p class="mt-4 text-xl font-bold text-violet-400">{{ t('role') }}</p>
+        <p class="mt-4 max-w-lg text-sm leading-7 text-slate-400">{{ t('intro') }}</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#projets" class="rounded-lg bg-violet-600 px-5 py-3 text-xs font-bold text-white shadow-lg shadow-violet-900/30 transition hover:bg-violet-500">{{ t('projects') }}</a>
+          <a href="#contact" class="rounded-lg border border-slate-600 px-5 py-3 text-xs font-bold text-white transition hover:border-violet-500">{{ t('contactMe') }} ◌</a>
+        </div>
+        <div class="mt-7 flex items-center gap-5 text-slate-300">
+          <a href="https://github.com/JESSY2023-bit" target="_blank" rel="noreferrer" aria-label="GitHub" class="social-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6a4.7 4.7 0 0 1 1.2-3.3c-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3a4.7 4.7 0 0 1 1.2 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/jessy-odriv-aba2ba315" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="social-text">in</a>
+          <a href="mailto:jessydjk.11@gmail.com" aria-label="Email" class="social-text">✉</a>
+          <a href="/CV_Jessy_Odriv.pdf" download aria-label="Télécharger mon CV" class="cv-link">CV ↓</a>
+        </div>
+      </div>
+
+      <div class="hero-visual relative mx-auto h-[360px] w-full max-w-md">
+        <div class="absolute inset-8 rounded-full bg-violet-700/20 blur-3xl"></div>
+        <div class="code-window absolute right-0 top-5 w-64 rounded-xl border border-violet-400/40 bg-[#0d1025]/95 p-4 shadow-2xl shadow-violet-900/30">
+          <div class="mb-3 flex gap-1"><i></i><i></i><i></i></div>
+          <code class="text-[10px] leading-5 text-emerald-300"><span class="text-violet-300">const</span> developer = &#123;<br>&nbsp; name: <span class="text-amber-300">'Jessy Odriv'</span>,<br>&nbsp; stack: [<span class="text-amber-300">'Angular'</span>,<br>&nbsp;&nbsp;&nbsp; <span class="text-amber-300">'Django'</span>]<br>&#125;</code>
+        </div>
+        <img class="avatar-3d absolute bottom-0 left-0 w-full max-w-md" src="/avatar-3d.png" alt="Avatar 3D de Jessy Odriv, développeur full-stack">
+      </div>
+    </div>
+  </section>
+
+  <section id="a-propos" class="mx-auto grid max-w-6xl gap-10 px-6 py-12 lg:grid-cols-2 lg:px-8">
+    <div>
+      <h2 class="section-title">◌ {{ t('about') }}</h2>
+      <p class="mt-5 text-sm leading-7 text-slate-400">{{ t('aboutText') }}</p>
+      <div class="mt-6 grid grid-cols-3 gap-2 text-[10px] text-slate-400">
+        <span class="info-card">🎓<b>{{ t('student') }}</b>{{ t('software') }}</span>
+        <span class="info-card">⌖<b>{{ t('based') }}</b>{{ t('location') }}</span>
+        <span class="info-card">◎<b>{{ t('goal') }}</b>Full-Stack AI Engineer</span>
+      </div>
+    </div>
+    <div>
+      <h2 class="section-title">▣ {{ t('what') }}</h2>
+      <ul class="mt-5 space-y-4 text-sm text-slate-400">
+        <li>▣ {{ t('webApps') }}</li><li>▣ {{ t('apis') }}</li><li>▣ {{ t('databases') }}</li>
+        <li>▣ {{ t('interfaces') }}</li><li>ϟ {{ t('optimization') }}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="competences" class="border-y border-white/5 bg-[#080b19]">
+    <div class="mx-auto max-w-6xl px-6 py-9 lg:px-8">
+      <h2 class="section-title">⌘ {{ t('skills') }}</h2>
+      <div class="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
+        @for (skill of skills; track skill.name) {
+          <div class="skill-card"><img [src]="skill.logo" [alt]="skill.name + ' logo'" loading="lazy"><span>{{ skill.name }}</span></div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="projets" class="mx-auto max-w-6xl px-6 py-12 lg:px-8">
+    <div class="flex items-center justify-between">
+      <h2 class="section-title">▣ {{ t('recent') }}</h2>
+      <a href="https://github.com/JESSY2023-bit?tab=repositories" class="text-[10px] text-slate-400 hover:text-violet-300">{{ t('allProjects') }} →</a>
+    </div>
+    <div class="mt-5 grid gap-4 md:grid-cols-3">
+      @for (project of projects; track project.title) {
+        <article class="project-card">
+          <a [href]="project.url" target="_blank" rel="noreferrer" class="block">
+            <img class="project-image" [src]="project.image" [alt]="'Capture de l’interface ' + project.title" loading="lazy">
+            <div class="p-4">
+              <div class="flex items-start justify-between gap-2">
+                <h3>{{ project.title }}</h3>
+                @if (project.collaboration) { <span class="collab">{{ t('contribution') }}</span> }
+              </div>
+              <p>{{ t(project.description) }}</p>
+              <div class="mt-3 flex flex-wrap gap-1">
+                @for (tag of project.stack; track tag) { <span class="tag">{{ tag }}</span> }
+              </div>
+            </div>
+          </a>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section id="experience" class="border-t border-white/5 bg-[#080b19]">
+    <div class="mx-auto max-w-6xl px-6 py-12 lg:px-8">
+      <h2 class="section-title">♧ {{ t('experience') }}</h2>
+      <div class="mt-6 border-l border-violet-500/40 pl-6">
+        <span class="text-[10px] text-slate-500">Juil. 2026 — {{ t('current') }}</span>
+        <div class="mt-3 rounded-xl border border-white/5 bg-[#0d1123] p-5">
+          <h3 class="text-sm font-bold text-violet-400">{{ t('intern') }}</h3>
+          <p class="mt-1 text-xs font-semibold text-slate-200">{{ t('company') }}</p>
+          <ul class="mt-3 space-y-2 text-xs leading-5 text-slate-400">
+            <li>• {{ t('experienceOne') }}</li><li>• {{ t('experienceTwo') }}</li><li>• {{ t('experienceThree') }}</li>
+          </ul>
+          <div class="mt-4 flex flex-wrap gap-1"><span class="tag">Angular</span><span class="tag">NestJS</span><span class="tag">MongoDB</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" class="mx-auto max-w-6xl px-6 py-10 lg:px-8">
+    <h2 class="section-title">▣ {{ t('contact') }}</h2>
+    <p class="mt-3 text-xs text-slate-400">{{ t('footerText') }}</p>
+    <div class="mt-5 grid gap-3 sm:grid-cols-3">
+      <a class="contact-card" href="mailto:jessydjk.11@gmail.com">✉ <span><b>Email</b>jessydjk.11@gmail.com</span></a>
+      <a class="contact-card" href="https://linkedin.com/in/jessy-odriv-aba2ba315" target="_blank" rel="noreferrer">in <span><b>LinkedIn</b>linkedin.com/in/jessy-odriv-aba2ba315</span></a>
+      <a class="contact-card" href="https://github.com/JESSY2023-bit" target="_blank" rel="noreferrer">
+        <svg class="contact-github" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6a4.7 4.7 0 0 1 1.2-3.3c-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3a4.7 4.7 0 0 1 1.2 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z"/></svg>
+        <span><b>GitHub</b>github.com/JESSY2023-bit</span>
+      </a>
+    </div>
+    <div class="mt-10 flex justify-between border-t border-white/5 pt-5 text-[10px] text-slate-500">
+      <span>© 2026 Jessy Odriv. {{ t('rights') }}</span><span>{{ t('designed') }}</span>
+    </div>
+  </footer>
+</main>
