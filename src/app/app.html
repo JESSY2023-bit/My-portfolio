@@ -1,147 +1,253 @@
-<main [class.light-theme]="lightMode()" class="min-h-screen overflow-hidden bg-[#050817] text-slate-100" (click)="closeMenu()">
-  <nav class="topbar mx-auto flex max-w-6xl items-center justify-between px-6 py-5 lg:px-8">
-    <a href="#accueil" class="text-2xl font-black tracking-tight text-white">JO<span class="text-violet-500">.</span></a>
+<header class="topbar">
+  <div class="read-progress" scrollProgress aria-hidden="true"></div>
+  <div class="wrap topbar-inner">
+    <a href="#top" class="logo" aria-label="Jessy Odriv">jessy<span class="logo-dot">.</span>odriv</a>
 
-    <div [class.mobile-nav-open]="menuOpen()" class="mobile-nav hidden items-center gap-7 text-xs font-medium text-slate-400 md:flex" (click)="$event.stopPropagation()">
-      <a href="#accueil" class="text-violet-400" (click)="closeMenu()">{{ t('navHome') }}</a>
-      <a href="#a-propos" class="transition hover:text-white" (click)="closeMenu()">{{ t('navAbout') }}</a>
-      <a href="#competences" class="transition hover:text-white" (click)="closeMenu()">{{ t('navSkills') }}</a>
-      <a href="#projets" class="transition hover:text-white" (click)="closeMenu()">{{ t('navProjects') }}</a>
-      <a href="#experience" class="transition hover:text-white" (click)="closeMenu()">{{ t('navExperience') }}</a>
-      <a href="#contact" class="transition hover:text-white" (click)="closeMenu()">{{ t('navContact') }}</a>
-    </div>
+    <nav class="nav" [class.open]="menuOpen()" id="main-nav">
+      <a href="#a-propos" (click)="closeMenu()">{{ t('navAbout') }}</a>
+      <a href="#projets" (click)="closeMenu()">{{ t('navProjects') }}</a>
+      <a href="#competences" (click)="closeMenu()">{{ t('navSkills') }}</a>
+      <a href="#parcours" (click)="closeMenu()">{{ t('navPath') }}</a>
+      <a href="#contact" class="nav-cta" (click)="closeMenu()">{{ t('navContact') }}</a>
+    </nav>
 
-    <div class="flex items-center gap-2" (click)="$event.stopPropagation()">
-      <button class="rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-300"
-        (click)="toggleLanguage()" [attr.aria-label]="'Langue : ' + language()">
+    <div class="tools">
+      <button type="button" class="tool" (click)="toggleLanguage()" [attr.aria-label]="t('language')">
         {{ language() === 'fr' ? 'EN' : 'FR' }}
       </button>
-      <button class="rounded-full border border-slate-700 px-3 py-1 text-sm text-slate-300"
-        (click)="toggleTheme()" [attr.aria-label]="t('theme')">◐</button>
-      <button class="hamburger rounded border border-slate-700 px-3 py-1 text-lg text-slate-300"
-        (click)="toggleMenu()" [attr.aria-label]="t('menu')">☰</button>
+      <button type="button" class="tool" (click)="toggleTheme()" [attr.aria-label]="t('theme')">
+        @if (dark()) {
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        } @else {
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+        }
+      </button>
+      <button type="button" class="tool burger" (click)="toggleMenu()" [attr.aria-label]="t('menu')"
+        [attr.aria-expanded]="menuOpen()" aria-controls="main-nav">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
-  </nav>
+  </div>
+</header>
 
-  <section id="accueil" class="relative border-y border-white/5">
-    <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 lg:grid-cols-[1fr_1fr] lg:px-8 lg:py-20">
-      <div class="relative z-10">
-        <span class="mb-5 inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 text-[10px] text-emerald-300">● {{ t('available') }}</span>
-        <p class="text-lg text-slate-200">{{ t('hello') }}</p>
-        <h1 class="mt-1 text-5xl font-black leading-none tracking-tight sm:text-7xl">JESSY <span class="text-violet-500">ODRIV</span></h1>
-        <p class="mt-4 text-xl font-bold text-violet-400">{{ t('role') }}</p>
-        <p class="mt-4 max-w-lg text-sm leading-7 text-slate-400">{{ t('intro') }}</p>
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href="#projets" class="rounded-lg bg-violet-600 px-5 py-3 text-xs font-bold text-white shadow-lg shadow-violet-900/30 transition hover:bg-violet-500">{{ t('projects') }}</a>
-          <a href="#contact" class="rounded-lg border border-slate-600 px-5 py-3 text-xs font-bold text-white transition hover:border-violet-500">{{ t('contactMe') }} ◌</a>
+<main id="top">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="status enter" style="--e:0"><span class="pulse" aria-hidden="true"></span>{{ t('available') }}</p>
+        <h1 class="name">
+          <span class="name-line" aria-hidden="true">
+            @for (c of first; track $index) { <span class="char" [style.--i]="$index">{{ c }}</span> }
+          </span>
+          <span class="name-line name-outline" aria-hidden="true">
+            @for (c of last; track $index) { <span class="char" [style.--i]="$index + 5">{{ c }}</span> }
+          </span>
+          <span class="sr-only">Jessy Odriv</span>
+        </h1>
+        <p class="role" aria-live="polite">
+          @for (r of roles; track $index) {
+            <span class="role-word" [class.active]="$index === roleIndex()" [attr.aria-hidden]="$index !== roleIndex()">{{ l(r) }}</span>
+          }
+        </p>
+        <p class="intro enter" style="--e:5">{{ t('intro') }}</p>
+        <div class="actions enter" style="--e:6">
+          <a href="#projets" class="btn btn-primary">{{ t('seeProjects') }}</a>
+          <a href="/CV_Jessy_Odriv.pdf" download class="btn btn-ghost">{{ t('downloadCv') }}</a>
         </div>
-        <div class="mt-7 flex items-center gap-5 text-slate-300">
-          <a href="https://github.com/JESSY2023-bit" target="_blank" rel="noreferrer" aria-label="GitHub" class="social-icon">
+        <div class="socials enter" style="--e:7">
+          <a href="https://github.com/JESSY2023-bit" target="_blank" rel="noreferrer" aria-label="GitHub">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6a4.7 4.7 0 0 1 1.2-3.3c-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3a4.7 4.7 0 0 1 1.2 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z"/></svg>
           </a>
-          <a href="https://linkedin.com/in/jessy-odriv-aba2ba315" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="social-text">in</a>
-          <a href="mailto:jessydjk.11@gmail.com" aria-label="Email" class="social-text">✉</a>
-          <a href="/CV_Jessy_Odriv.pdf" download aria-label="Télécharger mon CV" class="cv-link">CV ↓</a>
+          <a href="https://linkedin.com/in/jessy-odriv-aba2ba315" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.6 4.77 6v5.56h-4v-4.93c0-1.18-.02-2.7-1.65-2.7-1.65 0-1.9 1.29-1.9 2.62v5.01h-4v-11Z"/></svg>
+          </a>
+          <a href="mailto:jessydjk.11@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg>
+          </a>
         </div>
       </div>
 
-      <div class="hero-visual relative mx-auto h-[360px] w-full max-w-md">
-        <div class="absolute inset-8 rounded-full bg-violet-700/20 blur-3xl"></div>
-        <div class="code-window absolute right-0 top-5 w-64 rounded-xl border border-violet-400/40 bg-[#0d1025]/95 p-4 shadow-2xl shadow-violet-900/30">
-          <div class="mb-3 flex gap-1"><i></i><i></i><i></i></div>
-          <code class="text-[10px] leading-5 text-emerald-300"><span class="text-violet-300">const</span> developer = &#123;<br>&nbsp; name: <span class="text-amber-300">'Jessy Odriv'</span>,<br>&nbsp; stack: [<span class="text-amber-300">'Angular'</span>,<br>&nbsp;&nbsp;&nbsp; <span class="text-amber-300">'Django'</span>]<br>&#125;</code>
-        </div>
-        <img class="avatar-3d absolute bottom-0 left-0 w-full max-w-md" src="/avatar-3d.png" alt="Avatar 3D de Jessy Odriv, développeur full-stack">
+      <div class="hero-visual">
+        <div class="slab" aria-hidden="true"></div>
+        <span class="badge badge-a" aria-hidden="true">&lt;/&gt; NestJS</span>
+        <span class="badge badge-b" aria-hidden="true">✓ {{ t('badgePr') }}</span>
+        <img src="/avatar-3d.png" alt="Avatar 3D de Jessy Odriv à son bureau" width="768" height="891" class="avatar">
       </div>
     </div>
   </section>
 
-  <section id="a-propos" class="mx-auto grid max-w-6xl gap-10 px-6 py-12 lg:grid-cols-2 lg:px-8">
-    <div>
-      <h2 class="section-title">◌ {{ t('about') }}</h2>
-      <p class="mt-5 text-sm leading-7 text-slate-400">{{ t('aboutText') }}</p>
-      <div class="mt-6 grid grid-cols-3 gap-2 text-[10px] text-slate-400">
-        <span class="info-card">🎓<b>{{ t('student') }}</b>{{ t('software') }}</span>
-        <span class="info-card">⌖<b>{{ t('based') }}</b>{{ t('location') }}</span>
-        <span class="info-card">◎<b>{{ t('goal') }}</b>Full-Stack AI Engineer</span>
-      </div>
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      @for (s of strip; track $index) { <span>{{ s }}</span><i></i> }
     </div>
-    <div>
-      <h2 class="section-title">▣ {{ t('what') }}</h2>
-      <ul class="mt-5 space-y-4 text-sm text-slate-400">
-        <li>▣ {{ t('webApps') }}</li><li>▣ {{ t('apis') }}</li><li>▣ {{ t('databases') }}</li>
-        <li>▣ {{ t('interfaces') }}</li><li>ϟ {{ t('optimization') }}</li>
+  </div>
+
+  <!-- About -->
+  <section id="a-propos" class="section">
+    <div class="wrap about-grid" reveal>
+      <h2 class="h2">{{ t('aboutTitle') }}</h2>
+      <div class="about-text">
+        <p class="lead">{{ t('aboutText1') }}</p>
+        <p>{{ t('aboutText2') }}</p>
+      </div>
+      <dl class="facts">
+        <div><dt>{{ t('factStack') }}</dt><dd>{{ t('factStackValue') }}</dd></div>
+        <div><dt>{{ t('factPlace') }}</dt><dd>{{ t('factPlaceValue') }}</dd></div>
+        <div><dt>{{ t('factLang') }}</dt><dd>{{ t('factLangValue') }}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projets" class="section">
+    <div class="wrap">
+      <div class="section-head" reveal>
+        <h2 class="h2">{{ t('projectsTitle') }}</h2>
+        <p class="section-intro">{{ t('projectsIntro') }}</p>
+      </div>
+
+      @for (fp of featured; track fp.title; let odd = $odd) {
+        <article class="featured" [class.flip]="odd" [class.phones]="fp.shots === 'phones'" spotlight reveal="80">
+          <div class="featured-body">
+            <p class="kind">{{ l(fp.kind) }}</p>
+            <h3 class="h3">{{ fp.title }}</h3>
+            <p>{{ l(fp.summary) }}</p>
+            @if (fp.role) { <p class="role-note">{{ l(fp.role) }}</p> }
+            <ul class="checks">
+              @for (f of fp.features; track $index) { <li>{{ l(f) }}</li> }
+            </ul>
+            <ul class="tags" aria-label="Stack">
+              @for (s of fp.stack; track s) { <li>{{ s }}</li> }
+            </ul>
+            <div class="links">
+              @for (lk of fp.links; track lk.url) {
+                <a class="text-link" [href]="lk.url" target="_blank" rel="noreferrer">{{ l(lk.label) }}</a>
+              }
+            </div>
+          </div>
+          <div class="shots">
+            @for (img of fp.images; track img.src; let i = $index) {
+              <figure class="featured-shot" [class.shot-2]="i === 1" tilt>
+                <img [src]="img.src" [alt]="img.alt" loading="lazy">
+              </figure>
+            }
+          </div>
+        </article>
+      }
+
+      <ul class="project-list">
+        @for (p of projects; track p.title) {
+          <li class="project-row" [reveal]="$index * 90">
+            <div>
+              <h3 class="h4">{{ p.title }}</h3>
+              <p class="kind">{{ l(p.kind) }}</p>
+            </div>
+            <p class="row-summary">{{ l(p.summary) }}</p>
+            <div class="row-end">
+              <ul class="tags tags-sm">
+                @for (s of p.stack; track s) { <li>{{ s }}</li> }
+              </ul>
+              @if (p.url) {
+                <a class="text-link" [href]="p.url" target="_blank" rel="noreferrer">GitHub</a>
+              } @else {
+                <span class="muted-sm">{{ t('noRepo') }}</span>
+              }
+            </div>
+          </li>
+        }
       </ul>
     </div>
   </section>
 
-  <section id="competences" class="border-y border-white/5 bg-[#080b19]">
-    <div class="mx-auto max-w-6xl px-6 py-9 lg:px-8">
-      <h2 class="section-title">⌘ {{ t('skills') }}</h2>
-      <div class="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
-        @for (skill of skills; track skill.name) {
-          <div class="skill-card"><img [src]="skill.logo" [alt]="skill.name + ' logo'" loading="lazy"><span>{{ skill.name }}</span></div>
+  <!-- Skills -->
+  <section id="competences" class="section">
+    <div class="wrap">
+      <div class="section-head" reveal>
+        <h2 class="h2">{{ t('skillsTitle') }}</h2>
+        <p class="section-intro">{{ t('skillsIntro') }}</p>
+      </div>
+      <div class="skills">
+        @for (g of skillGroups; track $index; let isFirst = $first) {
+          <div class="skill-group" [class.primary]="isFirst" spotlight [reveal]="$index * 110">
+            <h3 class="h4">{{ l(g.title) }}</h3>
+            <p class="muted-sm">{{ l(g.context) }}</p>
+            <ul class="tags">
+              @for (s of g.items; track s) { <li>{{ s }}</li> }
+            </ul>
+          </div>
         }
       </div>
     </div>
   </section>
 
-  <section id="projets" class="mx-auto max-w-6xl px-6 py-12 lg:px-8">
-    <div class="flex items-center justify-between">
-      <h2 class="section-title">▣ {{ t('recent') }}</h2>
-      <a href="https://github.com/JESSY2023-bit?tab=repositories" class="text-[10px] text-slate-400 hover:text-violet-300">{{ t('allProjects') }} →</a>
-    </div>
-    <div class="mt-5 grid gap-4 md:grid-cols-3">
-      @for (project of projects; track project.title) {
-        <article class="project-card">
-          <a [href]="project.url" target="_blank" rel="noreferrer" class="block">
-            <img class="project-image" [src]="project.image" [alt]="'Capture de l’interface ' + project.title" loading="lazy">
-            <div class="p-4">
-              <div class="flex items-start justify-between gap-2">
-                <h3>{{ project.title }}</h3>
-                @if (project.collaboration) { <span class="collab">{{ t('contribution') }}</span> }
-              </div>
-              <p>{{ t(project.description) }}</p>
-              <div class="mt-3 flex flex-wrap gap-1">
-                @for (tag of project.stack; track tag) { <span class="tag">{{ tag }}</span> }
-              </div>
-            </div>
-          </a>
-        </article>
-      }
-    </div>
-  </section>
+  <!-- Path as git log -->
+  <section id="parcours" class="section">
+    <div class="wrap">
+      <div class="section-head" reveal>
+        <h2 class="h2">{{ t('pathTitle') }}</h2>
+        <p class="section-intro">{{ t('pathIntro') }}</p>
+      </div>
 
-  <section id="experience" class="border-t border-white/5 bg-[#080b19]">
-    <div class="mx-auto max-w-6xl px-6 py-12 lg:px-8">
-      <h2 class="section-title">♧ {{ t('experience') }}</h2>
-      <div class="mt-6 border-l border-violet-500/40 pl-6">
-        <span class="text-[10px] text-slate-500">Juil. 2026 — {{ t('current') }}</span>
-        <div class="mt-3 rounded-xl border border-white/5 bg-[#0d1123] p-5">
-          <h3 class="text-sm font-bold text-violet-400">{{ t('intern') }}</h3>
-          <p class="mt-1 text-xs font-semibold text-slate-200">{{ t('company') }}</p>
-          <ul class="mt-3 space-y-2 text-xs leading-5 text-slate-400">
-            <li>• {{ t('experienceOne') }}</li><li>• {{ t('experienceTwo') }}</li><li>• {{ t('experienceThree') }}</li>
-          </ul>
-          <div class="mt-4 flex flex-wrap gap-1"><span class="tag">Angular</span><span class="tag">NestJS</span><span class="tag">MongoDB</span></div>
+      <div class="gitlog">
+        <div class="legend" aria-hidden="true">
+          <span><i class="dot dot-main"></i>{{ t('mainBranch') }}</span>
+          <span><i class="dot dot-branch"></i>{{ t('workBranch') }}</span>
         </div>
+        <ol class="commits">
+          @for (m of milestones; track $index; let last = $last) {
+            <li class="commit" [class.on-branch]="m.branch" [class.last]="last" reveal>
+              <div class="lanes" aria-hidden="true">
+                <span class="lane-main"></span>
+                @if (m.branch) {
+                  @if (!m.head) {
+                    <svg class="curve curve-top" viewBox="0 0 40 28"><path d="M8 0 C 8 16, 32 12, 32 28" /></svg>
+                  }
+                  <span class="lane-branch" [class.from-top]="m.head"></span>
+                  <svg class="curve curve-bottom" viewBox="0 0 40 28"><path d="M32 0 C 32 16, 8 12, 8 28" /></svg>
+                  <span class="node node-branch"></span>
+                } @else {
+                  <span class="node node-main"></span>
+                }
+              </div>
+              <div class="commit-body">
+                <p class="commit-meta">
+                  <span class="mono">{{ l(m.date) }}</span>
+                  @if (m.head) { <span class="head">HEAD</span> }
+                </p>
+                <h3 class="h4">{{ l(m.title) }}</h3>
+                <p class="place">{{ m.place }}</p>
+                @if (m.details.length) {
+                  <ul class="details">
+                    @for (d of m.details; track $index) { <li>{{ l(d) }}</li> }
+                  </ul>
+                }
+              </div>
+            </li>
+          }
+        </ol>
       </div>
     </div>
   </section>
 
-  <footer id="contact" class="mx-auto max-w-6xl px-6 py-10 lg:px-8">
-    <h2 class="section-title">▣ {{ t('contact') }}</h2>
-    <p class="mt-3 text-xs text-slate-400">{{ t('footerText') }}</p>
-    <div class="mt-5 grid gap-3 sm:grid-cols-3">
-      <a class="contact-card" href="mailto:jessydjk.11@gmail.com">✉ <span><b>Email</b>jessydjk.11@gmail.com</span></a>
-      <a class="contact-card" href="https://linkedin.com/in/jessy-odriv-aba2ba315" target="_blank" rel="noreferrer">in <span><b>LinkedIn</b>linkedin.com/in/jessy-odriv-aba2ba315</span></a>
-      <a class="contact-card" href="https://github.com/JESSY2023-bit" target="_blank" rel="noreferrer">
-        <svg class="contact-github" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6a4.7 4.7 0 0 1 1.2-3.3c-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3a4.7 4.7 0 0 1 1.2 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.7 1 .7 2v2.9c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z"/></svg>
-        <span><b>GitHub</b>github.com/JESSY2023-bit</span>
-      </a>
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="wrap contact-inner" reveal>
+      <h2 class="contact-title">{{ t('contactTitle') }}</h2>
+      <p class="contact-text">{{ t('contactText') }}</p>
+      <a href="mailto:jessydjk.11@gmail.com" class="mail">jessydjk.11&#64;gmail.com</a>
+      <div class="contact-links">
+        <a href="https://linkedin.com/in/jessy-odriv-aba2ba315" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/JESSY2023-bit" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="/CV_Jessy_Odriv.pdf" download>CV (PDF)</a>
+      </div>
     </div>
-    <div class="mt-10 flex justify-between border-t border-white/5 pt-5 text-[10px] text-slate-500">
-      <span>© 2026 Jessy Odriv. {{ t('rights') }}</span><span>{{ t('designed') }}</span>
-    </div>
-  </footer>
+  </section>
 </main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>© {{ year }} Jessy Odriv Djikoungoue</span>
+    <span>{{ t('footer') }}</span>
+  </div>
+</footer>

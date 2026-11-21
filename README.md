@@ -6,8 +6,8 @@ moyens de me contacter.
 
 ## Aperçu
 
-Le portfolio est une application Angular moderne, responsive et inspirée d'une maquette
-à thème sombre. Il propose une navigation fluide sur une page unique, un thème clair et
+Le portfolio est une application Angular moderne, responsive et au design sur mesure
+(vert sarcelle et ambre). Il propose une navigation fluide sur une page unique, un thème clair et
 sombre, ainsi qu'une interface bilingue français/anglais.
 
 ## Fonctionnalités
@@ -20,7 +20,7 @@ sombre, ainsi qu'une interface bilingue français/anglais.
 - Bascule entre thème sombre et thème clair.
 - Présentation des compétences avec les logos des technologies.
 - Cartes de projets avec captures d'écran et liens vers GitHub.
-- Section d'expérience professionnelle basée sur le stage actuel chez LONDO Technology.
+- Parcours présenté sous forme de graphe « git log » (études et expériences).
 - Liens directs vers GitHub, LinkedIn et l'adresse email.
 - Téléchargement du CV au format PDF.
 
@@ -33,13 +33,10 @@ versions et tableau de bord.
 
 **Technologies :** React, Django REST, PostgreSQL, Tailwind CSS.
 
-### E-KMER Marketplace
+### Autres projets
 
-Contribution à une marketplace collaborative en cours de développement. Le projet est
-réparti entre plusieurs applications dédiées au client, à l'administration, à la livraison
-et au backend Django REST.
-
-**Technologies :** React, Django, Tailwind CSS, i18next.
+Aliette Shopping (e-commerce, projet académique) et une application de gestion des
+requêtes universitaires (projet collaboratif).
 
 ### Portfolio personnel
 

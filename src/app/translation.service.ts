@@ -1,30 +1,22 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import fr from '../assets/i18n/fr.json';
+import en from '../assets/i18n/en.json';
 
 type Language = 'fr' | 'en';
 type Dictionary = Record<string, string>;
 
+// Traductions embarquées dans le bundle : pas de requête HTTP, pas de clignotement au chargement.
+const DICTIONARIES: Record<Language, Dictionary> = { fr, en };
+
 @Injectable({ providedIn: 'root' })
 export class TranslationService {
   readonly language = signal<Language>('fr');
-  private readonly dictionaries = signal<Record<Language, Dictionary>>({ fr: {}, en: {} });
-
-  constructor(private readonly http: HttpClient) {
-    this.load('fr');
-    this.load('en');
-  }
 
   translate(key: string): string {
-    return this.dictionaries()[this.language()][key] ?? key;
+    return DICTIONARIES[this.language()][key] ?? key;
   }
 
   toggle(): void {
-    this.language.update((current) => current === 'fr' ? 'en' : 'fr');
-  }
-
-  private load(language: Language): void {
-    this.http.get<Dictionary>(`assets/i18n/${language}.json`).subscribe((dictionary) => {
-      this.dictionaries.update((current) => ({ ...current, [language]: dictionary }));
-    });
+    this.language.update((current) => (current === 'fr' ? 'en' : 'fr'));
   }
 }
